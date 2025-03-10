@@ -33,14 +33,14 @@ export async function POST(req) {
     
     // 生成唯一檔名
     const uniqueId = uuidv4();
-    const fileName = file.name.replace(/\.[^/.]+$/, ''); // 移除擴展名
-    const fileExtension = file.name.split('.').pop();
-    const uniqueFileName = `${fileName}-${uniqueId}.${fileExtension}`;
+    const fileType = file.type.split('/').pop(); // 從MIME類型獲取擴展名 (如 image/jpeg -> jpeg)
+    const uniqueFileName = `image-${uniqueId}.${fileType}`;
     
     // 使用 Vercel Blob 上傳
     const blob = await put(uniqueFileName, file, {
       access: 'public',
       contentType: file.type,
+      cacheControl: 'public, max-age=31536000, immutable', // 1年快取，因為URL是唯一的
     });
     
     return NextResponse.json({

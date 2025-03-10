@@ -59,6 +59,10 @@ export default function ImageForm() {
     setError('');
     
     try {
+      // 顯示本地預覽 (先讓使用者看到上傳的圖片)
+      const objectUrl = URL.createObjectURL(file);
+      setImageUrl(objectUrl);
+      
       // 創建FormData
       const formData = new FormData();
       formData.append('file', file);
@@ -75,6 +79,9 @@ export default function ImageForm() {
       }
       
       const data = await response.json();
+      
+      // 釋放本地預覽URL
+      URL.revokeObjectURL(objectUrl);
       
       // 設置上傳後的圖片URL
       setUploadedImageUrl(data.url);
