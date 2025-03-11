@@ -131,34 +131,55 @@ export default function ImageForm() {
       {/* URL輸入表單 */}
       {activeTab === 'url' && (
         <form onSubmit={handleSubmitUrl} className="mb-6">
-          <div className="mb-4">
-            <label htmlFor="imageUrl" className="block text-gray-700 mb-2">
-              圖片網址
-            </label>
-            <input
-              type="text"
-              id="imageUrl"
-              value={imageUrl}
-              onChange={handleUrlInput}
-              placeholder="https://example.com/image.jpg"
-              className="input-field"
-            />
-          </div>
-          <div className="flex space-x-3">
-            <button
-              type="submit"
-              className="btn-primary"
-              disabled={isLoading}
-            >
-              {isLoading ? '處理中...' : '搜尋此圖片'}
-            </button>
-            <button
-              type="button"
-              onClick={handleReset}
-              className="btn-secondary"
-            >
-              重置
-            </button>
+          <div className="md:flex md:space-x-4">
+            <div className="md:w-[60%]">
+              <div className="mb-4">
+                <label htmlFor="imageUrl" className="block text-gray-700 mb-2">
+                  圖片網址
+                </label>
+                <input
+                  type="text"
+                  id="imageUrl"
+                  value={imageUrl}
+                  onChange={handleUrlInput}
+                  placeholder="https://vvmg.cc/image.jpg"
+                  className="input-field"
+                />
+              </div>
+              <div className="flex space-x-3">
+                <button
+                  type="submit"
+                  className="btn-primary"
+                  disabled={isLoading}
+                >
+                  {isLoading ? '處理中...' : '搜尋此圖片'}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="btn-secondary"
+                >
+                  重置
+                </button>
+              </div>
+            </div>
+            
+            {/* 右側圖片預覽區塊 */}
+            {uploadedImageUrl && (
+              <div className="md:w-[40%] mt-6 md:mt-0">
+                <p className="text-gray-700 mb-2">圖片預覽</p>
+                <div className="border rounded p-2 bg-gray-50 flex justify-center">
+                  <div className="relative w-full h-32">
+                    <Image
+                      src={uploadedImageUrl}
+                      alt="搜尋圖片"
+                      fill
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </form>
       )}
@@ -166,28 +187,49 @@ export default function ImageForm() {
       {/* 圖片上傳表單 */}
       {activeTab === 'upload' && (
         <div className="mb-6">
-          <div className="mb-4">
-            <label htmlFor="imageUpload" className="block text-gray-700 mb-2">
-              選擇圖片
-            </label>
-            <input
-              type="file"
-              id="imageUpload"
-              accept="image/*"
-              onChange={handleUpload}
-              ref={fileInputRef}
-              className="block w-full text-gray-700 border border-gray-300 rounded py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <p className="text-gray-500 text-xs mt-1">支援 JPG, PNG, GIF 等格式，最大5MB</p>
+          <div className="md:flex md:space-x-4">
+            <div className="md:w-[60%]">
+              <div className="mb-4">
+                <label htmlFor="imageUpload" className="block text-gray-700 mb-2">
+                  選擇圖片
+                </label>
+                <input
+                  type="file"
+                  id="imageUpload"
+                  accept="image/*"
+                  onChange={handleUpload}
+                  ref={fileInputRef}
+                  className="block w-full text-gray-700 border border-gray-300 rounded py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <p className="text-gray-500 text-xs mt-1">支援 JPG, PNG, GIF 等格式，最大5MB</p>
+              </div>
+              <button
+                type="button"
+                onClick={handleReset}
+                className="btn-secondary"
+                disabled={isLoading}
+              >
+                重置
+              </button>
+            </div>
+            
+            {/* 右側圖片預覽區塊 */}
+            {uploadedImageUrl && (
+              <div className="md:w-[40%] mt-6 md:mt-0">
+                <p className="text-gray-700 mb-2">圖片預覽</p>
+                <div className="border rounded p-2 bg-gray-50 flex justify-center">
+                  <div className="relative w-full h-32">
+                    <Image
+                      src={uploadedImageUrl}
+                      alt="搜尋圖片"
+                      fill
+                      style={{ objectFit: 'contain' }}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
-          <button
-            type="button"
-            onClick={handleReset}
-            className="btn-secondary"
-            disabled={isLoading}
-          >
-            重置
-          </button>
         </div>
       )}
 
@@ -198,22 +240,11 @@ export default function ImageForm() {
         </div>
       )}
 
-      {/* 圖片預覽 */}
+      {/* 圖片網址資訊 */}
       {uploadedImageUrl && (
         <div className="mt-6">
-          <h3 className="text-lg font-medium mb-3">圖片預覽</h3>
-          <div className="border rounded p-2 mb-4 bg-gray-50 flex justify-center">
-            <div className="relative w-full max-w-md h-64">
-              <Image
-                src={uploadedImageUrl}
-                alt="搜尋圖片"
-                fill
-                style={{ objectFit: 'contain' }}
-              />
-            </div>
-          </div>
           <div className="bg-blue-50 p-3 rounded mb-4 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
             </svg>
             <span className="text-blue-700 text-sm break-all">圖片網址: {uploadedImageUrl}</span>

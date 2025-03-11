@@ -1,6 +1,20 @@
 'use client';
 
+import { useState } from 'react';
+
 export default function SearchButtons({ imageUrl }) {
+  const [showWarning, setShowWarning] = useState(false);
+  
+  // 當用戶點擊禁用的按鈕時顯示紅色警告
+  const handleDisabledClick = () => {
+    setShowWarning(true);
+    
+    // 3秒後恢復為灰色
+    setTimeout(() => {
+      setShowWarning(false);
+    }, 3000);
+  };
+  
   // 搜尋引擎的圖片搜尋URL結構
   const searchEngines = [
     {
@@ -25,17 +39,6 @@ export default function SearchButtons({ imageUrl }) {
       icon: (
         <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path fill="#FFFFFF" d="M5.71 2h4.76L22 11.8v.2l-8.04 3.71-8.25-3.71V2zm0 0M5.71 2L4 3.03v11.94l7 3.85 7.98-3.85.02-1L5.71 2z"/>
-        </svg>
-      )
-    },
-    {
-      name: 'Yandex',
-      url: `https://yandex.com/images/search?rpt=imageview&url=${encodeURIComponent(imageUrl)}`,
-      bgColor: 'bg-red-500',
-      hoverColor: 'hover:bg-red-600',
-      icon: (
-        <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#FFFFFF" d="M2 11.5c0-5.08 4.14-9.2 9.25-9.2 5.1 0 9.25 4.12 9.25 9.2s-4.15 9.2-9.25 9.2C6.14 20.7 2 16.58 2 11.5zm4.84-1.2v4.48h2.6V6h-2.6L4 8.12l.87 2.38 1.97-.2z"/>
         </svg>
       )
     },
@@ -66,37 +69,45 @@ export default function SearchButtons({ imageUrl }) {
   // 如果沒有圖片URL，則返回禁用的按鈕
   if (!imageUrl) {
     return (
-      <div className="space-y-3 mt-4">
-        <p className="text-gray-500 text-center mb-2">請先輸入圖片網址或上傳圖片</p>
-        {searchEngines.map((engine) => (
-          <button
-            key={engine.name}
-            disabled
-            className={`w-full ${engine.bgColor} opacity-50 text-white px-4 py-3 rounded flex items-center justify-center cursor-not-allowed`}
-          >
-            {engine.icon}
-            {engine.name} 圖片搜尋
-          </button>
-        ))}
+      <div className="mt-4">
+        <p className={`${showWarning ? 'text-red-500 font-medium' : 'text-gray-500'} text-center mb-2`}>
+          {showWarning ? '!!請先輸入圖片網址或上傳圖片!!' : '請先輸入圖片網址或上傳圖片'}
+        </p>
+        <div className="flex flex-col md:flex-row md:flex-wrap md:gap-2">
+          {searchEngines.map((engine) => (
+            <div
+              key={engine.name}
+              onClick={handleDisabledClick}
+              role="button"
+              aria-disabled="true"
+              className={`w-full md:w-auto md:flex-1 ${engine.bgColor} opacity-50 text-white px-4 py-3 rounded flex items-center justify-center cursor-not-allowed mb-3 md:mb-0`}
+            >
+              {engine.icon}
+              {engine.name}
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="space-y-3 mt-4">
+    <div className="mt-4">
       <p className="text-gray-600 text-center mb-2">選擇搜尋引擎進行圖片搜尋</p>
-      {searchEngines.map((engine) => (
-        <a
-          key={engine.name}
-          href={engine.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`block w-full ${engine.bgColor} ${engine.hoverColor} text-white px-4 py-3 rounded flex items-center justify-center transition-colors`}
-        >
-          {engine.icon}
-          {engine.name} 圖片搜尋
-        </a>
-      ))}
+      <div className="flex flex-col md:flex-row md:flex-wrap md:gap-2">
+        {searchEngines.map((engine) => (
+          <a
+            key={engine.name}
+            href={engine.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`block w-full md:w-auto md:flex-1 ${engine.bgColor} ${engine.hoverColor} text-white px-4 py-3 rounded flex items-center justify-center transition-colors mb-3 md:mb-0`}
+          >
+            {engine.icon}
+            {engine.name}
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
