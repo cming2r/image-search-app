@@ -7,10 +7,8 @@ export default function Footer() {
     <footer className="bg-white border-t mt-auto">
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <p className="text-gray-600 text-sm">
-              &copy; {currentYear} 圖片搜尋工具 | 所有權利保留
-            </p>
+          <div className="text-gray-500 text-sm mt-1">
+          <p>此工具僅供學習和個人使用，請尊重著作權並遵守各搜尋引擎的使用條款</p>
           </div>
           <div>
             <p className="text-gray-500 text-sm">
@@ -21,8 +19,11 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div className="mt-4 text-center text-xs text-gray-400">
-          <p>此工具僅供學習和個人使用，請尊重著作權並遵守各搜尋引擎的使用條款</p>
+        <div className="mt-4 text-center text-sm text-gray-500">
+          
+          <p>
+          Copyright &copy; {currentYear} - fyimg.com
+            </p>
         </div>
       </div>
     </footer>
