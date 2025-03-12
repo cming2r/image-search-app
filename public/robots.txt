@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vvmg.cc/sitemap.xml
+Sitemap: https://fyimg.com/sitemap.xml
