@@ -1,5 +1,5 @@
 import './globals.css';
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: '圖片搜尋工具 | 使用Google、Bing等引擎搜索圖片',

@@ -69,6 +69,13 @@ export default function Home() {
               Bing Image Search 是微軟的圖像搜索引擎，集成到 Bing 搜索引擎中。 Bing Image Search 提供了一個乾淨有序的界面，帶有大小、顏色、樣式和佈局的過濾器。 它還提供了一個"相關搜索"部分，建議用戶可能也感興趣的相關主題。 此外，必應圖像搜索提供了一個"桌布圖片"搜索類別，允許用戶搜索和下載桌面壁紙。
             </p>
           </div>
+
+          <div className="mt-8 bg-white p-6 rounded-lg shadow-sm mb-8">
+            <h2 className="text-xl font-semibold mb-4">TinEye</h2>
+            <p className="text-gray-700">
+              TinEye 是一個專注於圖像識別的搜尋引擎，其特點是能夠精確找出圖片的確切匹配，而不僅僅是類似的圖片。TinEye 特別適合用於：追蹤圖片在網路上的使用情況、查找圖片的最早出現時間、尋找更高解析度的版本，以及確認圖片是否為原創或被修改過。對於版權所有者和創作者而言，TinEye 是監控其作品在網路上傳播情況的實用工具。
+            </p>
+          </div>
           
           <div className="mt-8 bg-white p-6 rounded-lg shadow-sm mb-8">
             <h2 className="text-xl font-semibold mb-4">SauceNAO</h2>
@@ -77,12 +84,7 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="mt-8 bg-white p-6 rounded-lg shadow-sm mb-8">
-            <h2 className="text-xl font-semibold mb-4">TinEye</h2>
-            <p className="text-gray-700">
-              TinEye 是一個專注於圖像識別的搜尋引擎，其特點是能夠精確找出圖片的確切匹配，而不僅僅是類似的圖片。TinEye 特別適合用於：追蹤圖片在網路上的使用情況、查找圖片的最早出現時間、尋找更高解析度的版本，以及確認圖片是否為原創或被修改過。對於版權所有者和創作者而言，TinEye 是監控其作品在網路上傳播情況的實用工具。
-            </p>
-          </div>
+
         </section>
       </main>
       <Footer />
