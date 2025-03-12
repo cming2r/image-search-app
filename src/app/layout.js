@@ -1,4 +1,5 @@
 import './globals.css';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
@@ -69,6 +70,8 @@ export default function RootLayout({ children }) {
       </head>
       <body className="flex flex-col min-h-screen bg-gray-50">
         {children}
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
